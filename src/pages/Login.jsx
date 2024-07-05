@@ -9,9 +9,9 @@ import { AuthContext } from "../providers/AuthProvider";
 import { useContext, useState } from "react";
 
 const Login = () => {
-    const [loginError, setLoginError] = useState('')  
+    // const [loginError, setLoginError] = useState('')  
     const [view, setView] = useState(false)  
-      const {signIn, googleSignIn, gitHubSignIn, loading} = useContext(AuthContext);
+      const {signIn, googleSignIn, gitHubSignIn, loading, user} = useContext(AuthContext);
       const location = useLocation();
       const navigate = useNavigate();
   
@@ -25,20 +25,44 @@ const Login = () => {
       const handleGoogleSignIn = ( ) => {
         googleSignIn (auth, googleProvider)
         .then(() => {
+          if(user?.email){
+            Swal.fire({
+              title: 'Success!',
+              text: 'Login successfully',
+              icon: 'success',
+              confirmButtonText: 'Cool'
+            })
+          }
           // navigate after register
           navigate(location?.state ? location.state : '/');
        }).catch((error) => {
-         alert(error.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.message}`,
+        });
        }); 
       }
   
       const handleGitHubSignIn = ( ) => {
         gitHubSignIn (auth, gitHubProvider)
         .then(() => {
+          if(user?.email){
+            Swal.fire({
+              title: 'Success!',
+              text: 'Login successfully',
+              icon: 'success',
+              confirmButtonText: 'Cool'
+            })
+          }
           // navigate after register
           navigate(location?.state ? location.state : '/');
        }).catch((error) => {
-       alert('Ops!', error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.message}`,
+        });
        }); 
       }
     
@@ -50,15 +74,30 @@ const Login = () => {
             const password = form.get('password');
   
             if(password.length < 6) {
-              setLoginError('Password must be at least 6 characters long.')
+              // setLoginError('Password must be at least 6 characters long.')
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: 'Password must be at least 6 characters long.',
+              });
               return;
             }
             else if(!/[A-Z]/.test(password)) {
-              setLoginError('Password must be at least one Uppercase character.')
+              // setLoginError('Password must be at least one Uppercase character.')
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: 'Password must be at least one Uppercase character.',
+              });
               return;
             }
             else if(!/[a-z]/.test(password)) {
-              setLoginError('Password must be at least one Lowercase character.')
+              // setLoginError('Password must be at least one Lowercase character.')
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: 'Password must be at least one Lowercase character.',
+              });
               return;
             }
   
@@ -73,13 +112,19 @@ const Login = () => {
                   })
                 }
               // navigate after login
-             if(result.user.email){         
+             if(result?.user?.email){         
               navigate(location?.state ? location.state : '/');
              }
             })
             .catch(error => {
-              setLoginError(error.message);
-              return;
+              if(error){
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: `${error.message}`,
+                })
+                navigate('/');
+              }
             })
         }
   
@@ -89,9 +134,9 @@ const Login = () => {
             <Helmet>
                   <title>Login | Jute Decor</title>
               </Helmet>
-              {
+              {/* {
                 loginError && alert(loginError)
-              }
+              } */}
             <div className="w-3/5  mx-auto mt-10">
                 <div className="bg-slate-100 p-6">
                     <h4 className="text-center">Please Login</h4>

@@ -71,7 +71,6 @@ const MyCraftList = ({ setCrafts }) => {
                       </div>
                       <div className="card-actions justify-end ml-6">
                         <div className="join join-vertical">
-                          <button className="btn join-item mb-4">View</button>
                           <Link to={`updateCraft/${_id}`}>
                             <button className="btn join-item mb-4">Edit</button>
                           </Link>

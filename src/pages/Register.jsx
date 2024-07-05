@@ -10,9 +10,9 @@ import { useContext, useState } from "react";
 
 const Register = () => {
   
-    const [registerError, setRegisterError] = useState('');  
+    // const [registerError, setRegisterError] = useState('');  
     const [view, setView] = useState(false);  
-    const {createUser, googleSignIn, gitHubSignIn, loading} = useContext(AuthContext);
+    const {createUser, googleSignIn, gitHubSignIn, loading, user} = useContext(AuthContext);
       const location = useLocation();
       const navigate = useNavigate();
   
@@ -26,20 +26,44 @@ const Register = () => {
       const handleGoogleSignIn = ( ) => {
         googleSignIn (auth, googleProvider)
         .then(() => {
+          if(user?.email){
+            Swal.fire({
+              title: 'Success!',
+              text: 'Login successfully',
+              icon: 'success',
+              confirmButtonText: 'Cool'
+            })
+          }
           // navigate after register
           navigate(location?.state ? location.state : '/');
        }).catch((error) => {
-         alert('Ops!', error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.message}`,
+        });
        }); 
       }
   
       const handleGitHubSignIn = ( ) => {
         gitHubSignIn (auth, gitHubProvider)
         .then(() => {
+          if(user?.email){
+            Swal.fire({
+              title: 'Success!',
+              text: 'Login successfully',
+              icon: 'success',
+              confirmButtonText: 'Cool'
+            })
+          }
           // navigate after register
           navigate(location?.state ? location.state : '/');
        }).catch((error) => {
-         alert('Ops!', error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.message}`,
+        });
        }); 
       }
   
@@ -52,15 +76,29 @@ const Register = () => {
           const password = form.password.value;
           // console.log(name, photo, email, password);
           if(password.length < 6) {
-            setRegisterError('Password must be at least 6 characters long.')
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: 'Password must be at least 6 character.',
+            });
             return;
           }
           else if(!/[A-Z]/.test(password)) {
-            setRegisterError('Password must be at least one Uppercase character.')
+            // setRegisterError('Password must be at least one Uppercase character.')
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: 'Password must be at least one Uppercase character.',
+            });
             return;
           }
           else if(!/[a-z]/.test(password)) {
-            setRegisterError('Password must be at least one Lowercase character.')
+            // setRegisterError('Password must be at least one Lowercase character.')
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: 'Password must be at least one Lowercase character.',
+            });
             return;
           }
   
@@ -84,7 +122,14 @@ const Register = () => {
                // navigate after register
                navigate(location?.state ? location.state : '/');
             }).catch((error) => {
-              alert('Ops!', error);
+              if(error){
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: `${error.message}`,
+                })
+                navigate('/')
+              }
             });         
            }
           })
@@ -95,9 +140,9 @@ const Register = () => {
           <Helmet>
                   <title>Register | Tiny House</title>
               </Helmet>
-              {
+              {/* {
                 registerError && alert(registerError)
-              }
+              } */}
           <div className="w-3/5 mx-auto mt-10">
               <div className="bg-slate-100 p-6">
                <h4 className="text-center">Please Register</h4>

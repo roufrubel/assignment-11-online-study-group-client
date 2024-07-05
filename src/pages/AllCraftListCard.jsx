@@ -16,6 +16,7 @@ const AllCraftListCard = ({ craft }) => {
           <td>{craft.item_name}</td>
           <td>${craft.price}</td>
           <td>{craft.stockStatus}</td>
+          <td><button className="btn join-item mb-4">View Details</button></td>
         </tr>
       </tbody>
     );
