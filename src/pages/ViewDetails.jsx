@@ -19,23 +19,24 @@ const ViewDetails = () => {
   } = craft;
 
   return (
-    <div className="card">
+    <div className="mt-4 mb-6 px-2">
+        <div className="card md:pt-4 lg:pt-4 w-full mx-auto m-2 md:w-1/2 lg:w-1/2 mt-10 mb-10 border rounded-lg">
       <figure>
-        <img src={image} alt="craft" />
+        <img className="rounded-xl" src={image} alt="craft" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{item_name}</h2>
-        <p>{subcategory_name}</p>
+        <p>Subcategory: {subcategory_name}</p>
         <p>{short_description}</p>
-        <p className="text-lg font-semibold">{price}</p>
-        <p>{rating}</p>
-        <p>{customization}</p>
-        <p>{processing_time}</p>
-        <p>{stockStatus}</p>
-        <p>{user_email}</p>
-        <p>{stockStatus}</p>
-        <p>{user_name}</p>
+        <p className="text-lg font-semibold">Price: $ {price}</p>
+        <p>Ratings: {rating}</p>
+        <p>Customization: {customization}</p>
+        <p>Time: {processing_time}</p>
+        <p>Stock: {stockStatus}</p>
+        <p>Email: {user_email}</p>
+        <p>Name: {user_name}</p>
       </div>
+    </div>
     </div>
   );
 };
