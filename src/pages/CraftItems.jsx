@@ -17,11 +17,11 @@ const CraftItems = () => {
       }
     return (
         <div className="mt-6 mb-6">
-            <h2 className="mt-20 text-2xl font-bold text-center">Craft Items: {crafts.length}</h2>
+            <h2 className="mt-20 text-3xl font-bold text-center text-blue-800 mb-8">Craft Items</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {crafts.map((craft) => (
                 <div key={craft._id}>
-                  <div className="card card-side border p-6">
+                  <div className="card card-side border p-6 mb-4 mx-2">
                     <figure>
                       <img src={craft.image} alt="Movie" />
                     </figure>

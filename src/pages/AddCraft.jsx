@@ -58,7 +58,7 @@ const AddCraft = () => {
   return (
     <div className="text-center mb-12">
       <h2 className="mt-6 mb-6 font-bold text-2xl text-blue-800">Add a Craft</h2>
-      <form onSubmit={handleAddSubmit} className="w-1/2 mx-auto space-y-2">
+      <form onSubmit={handleAddSubmit} className="w-full px-2 md:w-1/2 lg:w-1/2 mx-auto space-y-2">
         <label className="input input-bordered flex items-center gap-2">
           <input
             type="text"
