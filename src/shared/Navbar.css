@@ -1,0 +1,24 @@
+/* styles.css */
+.image-container {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .tooltip {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 14px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 10;
+  }
+  
+  .image-container:hover .tooltip {
+    display: block;
+  }
