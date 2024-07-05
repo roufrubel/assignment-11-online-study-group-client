@@ -123,7 +123,7 @@ const Login = () => {
                   title: "Oops...",
                   text: `${error.message}`,
                 })
-                navigate('/');
+                 navigate('/login');
               }
             })
         }
