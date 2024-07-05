@@ -27,11 +27,12 @@ const AllCraftList = () => {
           <table className="table">
             {/* head */}
             <thead>
-              <tr>
+              <tr className="text-lg font-bold">
                 <th></th>
                 <th>Craft Name</th>
                 <th>Price</th>
                 <th>Stock Status</th>
+                <th>View Details</th>
               </tr>
             </thead>
             {crafts.map((craft) => (

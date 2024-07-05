@@ -10,6 +10,7 @@ import Register from "../pages/Register";
 import AddCraft from "../pages/AddCraft";
 import MyCraftList from "../pages/MyCraftList";
 import PrivateRoute from "./PrivateRoute";
+import ViewDetails from "../pages/ViewDetails";
 
 const Router = createBrowserRouter([
     {
@@ -22,11 +23,11 @@ const Router = createBrowserRouter([
             element: <Home></Home>
         },
         {
-            path: "/login",
+            path: "login",
             element: <Login></Login>
         },
         {
-            path: "/register",
+            path: "register",
             element: <Register></Register>
         },
         {
@@ -34,7 +35,7 @@ const Router = createBrowserRouter([
           element: <PrivateRoute><AddCraft></AddCraft></PrivateRoute>,
         },
         {
-            path: "/allcraftlist",
+            path: "allcraftlist",
             element: <AllCraftList></AllCraftList>,
         },
         {
@@ -42,6 +43,12 @@ const Router = createBrowserRouter([
           element: <PrivateRoute><MyCraftList></MyCraftList></PrivateRoute>,
           loader: () => fetch("https://assignment-10-jute-home-decor-server.vercel.app/craft"
             ),
+        },
+        {
+          path: "craft/:id",
+          element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
+          loader: () => fetch("https://assignment-10-jute-home-decor-server.vercel.app/craft"
+          ),
         },
       ]
     },
