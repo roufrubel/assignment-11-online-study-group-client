@@ -1,8 +1,8 @@
 import Banner from "./Banner";
 import CategorySection from "./CategorySection";
 import CraftItems from "./CraftItems";
-import Reviews from "./Reviews";
-import Sale from "./Sale";
+// import Reviews from "./Reviews";
+// import Sale from "./Sale";
 
 
 const Home = () => {
