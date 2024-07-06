@@ -1,8 +1,20 @@
-# React + Vite
+## JUTE DECOR
+Category Name: B9 A10 Type-02 Requirements
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website Live Link: https://assign-10-jute-decor-client.web.app
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About: 
+A diverse range of eco-friendly jute home decor items including wall hangings, table runners, plant holders, and more.
+
+## Features: 
+Browse a variety of handcrafted jute products, view detailed descriptions, ratings, and customization options, and easily manage your cart and purchases.
+
+## Tech Stack:
+Built with React for the frontend, Node.js and Express for the backend, and MongoDB for the database.
+
+## Eco-Friendly: 
+Our jute home decor items are made from sustainable materials, ensuring you make a positive impact on the environment with every purchase.
+
+## Unique Designs: 
+Each piece in our collection is handcrafted by skilled artisans, offering you exclusive and unique designs that add a rustic charm to your home..
