@@ -22,13 +22,12 @@ const AllCraftList = () => {
       <h2 className=" mt-10 mb-6 text-2xl font-bold text-center text-blue-800">
         All Art & Craft Items
       </h2>
-      <div className="grid grid-cols-1 gap-10 container mx-auto mt-6 mb-6">
+      <div className="grid grid-cols-1 gap-10 md:container lg:container mx-auto mt-6 mb-6">
         <div className="overflow-x-auto ">
           <table className="table">
             {/* head */}
             <thead>
-              <tr className="text-lg font-bold">
-                <th></th>
+              <tr className="md:text-lg lg:text-lg md:font-bold lg:font-bold">
                 <th>Craft Name</th>
                 <th>Price</th>
                 <th>Stock Status</th>

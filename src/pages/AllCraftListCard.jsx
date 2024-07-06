@@ -15,7 +15,6 @@ const AllCraftListCard = ({ craft }) => {
     return (
       <tbody>
         <tr>
-          <th></th>
           <td className="font-semibold">{craft.item_name}</td>
           <td>${craft.price}</td>
           <td>{craft.stockStatus}</td>
