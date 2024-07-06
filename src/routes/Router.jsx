@@ -11,6 +11,7 @@ import AddCraft from "../pages/AddCraft";
 import MyCraftList from "../pages/MyCraftList";
 import PrivateRoute from "./PrivateRoute";
 import ViewDetails from "../pages/ViewDetails";
+import Update from "../pages/Update";
 
 const Router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const Router = createBrowserRouter([
           loader: () => fetch("https://assignment-10-jute-home-decor-server.vercel.app/craft"
           ),
         },
+        {
+          path: 'update',
+          element: <PrivateRoute><Update></Update></PrivateRoute>,
+        }
       ]
     },
   ]);

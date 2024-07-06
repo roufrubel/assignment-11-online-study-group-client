@@ -2,12 +2,14 @@ import { useContext, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { FaChevronDown } from "react-icons/fa";
 
 const MyCraftList = () => {
   const { user } = useContext(AuthContext);
   const loadedCrafts = useLoaderData();
   const [crafts, setCrafts] = useState(loadedCrafts);
   const myCrafts = crafts.filter((craft) => craft.user_email === user.email);
+  const [mySortingCrafts, setMySortingCrafts] = useState(myCrafts);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -25,10 +27,13 @@ const MyCraftList = () => {
           text: "Your file has been deleted.",
           icon: "success",
         });
-        fetch(`https://assignment-10-jute-home-decor-server.vercel.app/craft/${id}`, {
+        fetch(
+          `https://assignment-10-jute-home-decor-server.vercel.app/craft/${id}`,
+          {
             method: "DELETE",
           }
-        ).then((res) => res.json())
+        )
+          .then((res) => res.json())
           .then((data) => {
             console.log(data);
             if (data.deletedCount > 0) {
@@ -36,24 +41,62 @@ const MyCraftList = () => {
                 title: "Deleted!",
                 text: "Your craft has been deleted.",
                 icon: "success",
-              })
+              });
               const remaining = crafts.filter((crft) => crft._id !== id);
               setCrafts(remaining);
             }
-          })
+          });
       }
-    })
-  }
+    });
+  };
+
+  const handleFilter = (filter) => {
+    let filteredCrafts = [];
+    if (filter === "yes") {
+      filteredCrafts = myCrafts.filter(
+        (craft) => craft.customization.toLowerCase() === "yes"
+      );
+    } else if (filter === "no") {
+      filteredCrafts = myCrafts.filter(
+        (craft) => craft.customization.toLowerCase() === "no"
+      );
+    }
+    setMySortingCrafts(filteredCrafts);
+  };
 
   return (
     <div className="min-h-screen mb-10 ">
       <h2 className="text-center mt-6 mb-6 font-bold text-2xl text-blue-800">
         My Craft List
       </h2>
+
+      {/* filtering crafts */}
+      <div className="dropdown dropdown-bottom flex justify-center">
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn m-1 font-medium btn-primary text-black btn-outline"
+        >
+          Filter by Customization
+          <FaChevronDown className="mr-2" />
+        </div>
+        <ul
+          tabIndex={0}
+          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+        >
+          <li onClick={() => handleFilter("yes")}>
+            <a>Customization: Yes</a>
+          </li>
+          <li onClick={() => handleFilter("no")}>
+            <a>Customization: No</a>
+          </li>
+        </ul>
+      </div>
+
       <div>
-        {myCrafts.length > 0 ? (
+        {mySortingCrafts.length > 0 ? (
           <div>
-            {myCrafts.map((craft) => (
+            {mySortingCrafts.map((craft) => (
               <div
                 key={craft._id}
                 className="card card-side border p-2 md:p-6 lg:p-6 flex-col md:flex-row lg:flex-row items-center justify-evenly w-full md:w-2/3 lg:w-2/3 mx-auto gap-2 md:gap-6 lg:gap-6 mt-10"
@@ -70,9 +113,9 @@ const MyCraftList = () => {
                   <p>Customization: {craft.customization}</p>
                   <p>Stock: {craft.stockStatus}</p>
                   <div className="flex items-center justify-around gap-4">
-                    {/* <Link to={`updateCraft/${_id}`}> */}
-                    <button className="btn">Update</button>
-                    {/* </Link> */}
+                    <Link to={`/update/${craft._id}`}>
+                      <button className="btn">Update</button>
+                    </Link>
                     <button
                       onClick={() => handleDelete(craft._id)}
                       className="btn"
