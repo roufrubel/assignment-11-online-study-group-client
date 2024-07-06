@@ -14,7 +14,7 @@ const MyCraftList = () => {
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You want to delete this craft!",
+      text: "Do you want to delete this craft?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -24,9 +24,9 @@ const MyCraftList = () => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Deleted!",
-          text: "Your file has been deleted.",
+          text: "Your craft has been deleted.",
           icon: "success",
-        });
+        })
         fetch(
           `https://assignment-10-jute-home-decor-server.vercel.app/craft/${id}`,
           {
@@ -37,12 +37,8 @@ const MyCraftList = () => {
           .then((data) => {
             console.log(data);
             if (data.deletedCount > 0) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your craft has been deleted.",
-                icon: "success",
-              });
-              const remaining = crafts.filter((crft) => crft._id !== id);
+              
+              const remaining = crafts.filter((craft) => craft._id !== id);
               setCrafts(remaining);
             }
           });
