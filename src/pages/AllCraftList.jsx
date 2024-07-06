@@ -19,7 +19,7 @@ const AllCraftList = () => {
   return (
     <div>
       <>
-      <h2 className=" mt-20 mb-6 text-2xl font-bold text-center text-blue-800">
+      <h2 className=" mt-10 mb-6 text-2xl font-bold text-center text-blue-800">
         All Art & Craft Items
       </h2>
       <div className="grid grid-cols-1 gap-10 container mx-auto mt-6 mb-6">

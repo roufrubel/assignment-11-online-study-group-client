@@ -41,8 +41,7 @@ const Router = createBrowserRouter([
         {
           path: "list",
           element: <PrivateRoute><MyCraftList></MyCraftList></PrivateRoute>,
-          loader: () => fetch("https://assignment-10-jute-home-decor-server.vercel.app/craft"
-            ),
+          loader: () => fetch("https://assignment-10-jute-home-decor-server.vercel.app/craft"), 
         },
         {
           path: "craft/:id",

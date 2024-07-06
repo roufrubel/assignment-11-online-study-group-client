@@ -4,22 +4,11 @@ const ViewDetails = () => {
   const crafts = useLoaderData();
   const { id } = useParams();
   const craft = crafts?.find((craft) => craft._id === id);
-  const {
-    image,
-    item_name,
-    subcategory_name,
-    short_description,
-    price,
-    rating,
-    customization,
-    processing_time,
-    stockStatus,
-    user_email,
-    user_name,
-  } = craft;
+  const { image, item_name, subcategory_name, short_description, price, rating,customization, processing_time, stockStatus, user_email, user_name } = craft;
 
   return (
     <div className="mt-4 mb-6 px-2">
+        <h2 className="mt-4 mb-6 font-bold text-2xl text-blue-800 text-center">Craft View Details</h2>
         <div className="card md:pt-4 lg:pt-4 w-full mx-auto m-2 md:w-1/2 lg:w-1/2 mt-10 mb-10 border rounded-lg">
       <figure>
         <img className="rounded-xl" src={image} alt="craft" />
