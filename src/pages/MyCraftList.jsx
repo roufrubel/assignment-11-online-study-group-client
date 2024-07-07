@@ -38,7 +38,7 @@ const MyCraftList = () => {
             console.log(data);
             if (data.deletedCount > 0) {
               
-              const remaining = crafts.filter((craft) => craft._id !== id);
+              const remaining = mySortingCrafts.filter((craft) => craft._id !== id);
               setCrafts(remaining);
             }
           });
