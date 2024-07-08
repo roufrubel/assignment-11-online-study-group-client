@@ -18,7 +18,7 @@ const CraftItems = () => {
     return (
         <div className="mt-6 mb-6">
             <h2 className="mt-20 text-3xl font-bold text-center text-blue-800 mb-8">Craft Items</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grow">
             {crafts.map((craft) => (
                 <div key={craft._id}>
                   <div className="card card-side border mb-8 mx-2 flex-col">

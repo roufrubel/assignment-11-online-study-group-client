@@ -16,10 +16,10 @@ const CategorySection = () => {
     return (
         <div className="mt-6 mb-6">
             <h2 className="mt-20 text-3xl font-bold text-center text-blue-800 mb-12">Art & Craft Categories</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-2 md:gap-6 lg:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-2 md:gap-6 lg:gap-6 grow">
             {crafts.map((craft) => (
                 <div key={craft._id}>
-                  <div className="card card-side mb-8 mx-2 flex-col shadow-md">
+                  <div className="card card-side mb-8 mx-2 flex-col shadow-md ">
                     <div className="mb-4">
                     <figure>
                       <img className="rounded-t-xl" src={craft.image} alt="Movie" />

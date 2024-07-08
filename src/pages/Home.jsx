@@ -1,7 +1,7 @@
 import Banner from "./Banner";
 import CategorySection from "./CategorySection";
 import CraftItems from "./CraftItems";
-// import Reviews from "./Reviews";
+import Reviews from "./Reviews";
 // import Sale from "./Sale";
 
 
@@ -11,8 +11,8 @@ const Home = () => {
       <Banner></Banner>
       <CraftItems></CraftItems>
       <CategorySection></CategorySection>
-      {/* <Sale></Sale>
-      <Reviews></Reviews> */}
+      {/* <Sale></Sale> */}
+      <Reviews></Reviews>
     </div>
   );
 };
