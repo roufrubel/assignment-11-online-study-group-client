@@ -5,7 +5,7 @@ const Update = () => {
     
     return (
         <div>
-            <h2>Update: </h2>
+            <h2>Update: mySortingCrafts</h2>
         </div>
     );
 };
