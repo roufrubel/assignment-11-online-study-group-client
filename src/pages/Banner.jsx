@@ -8,7 +8,7 @@ const Banner = () => {
         <div className="carousel">
         <div
         id="slide1"
-  className="hero sm:h-[400px] md:min-h-screen lg:min-h-screen relative carousel-item"
+  className="hero h-auto md:min-h-screen lg:min-h-screen relative carousel-item"
   style={{
     backgroundImage: "url(https://i.ibb.co/gb892kF/web-banner02.png)",
   }}>
@@ -75,4 +75,4 @@ const Banner = () => {
     );
 };
 
-export default Banner;
+export default Banner; 
