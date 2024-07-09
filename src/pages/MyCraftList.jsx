@@ -37,7 +37,7 @@ const MyCraftList = () => {
           .then((data) => {
             console.log(data);
             if (data.deletedCount > 0) {              
-              const remaining = crafts.filter((craft) => craft._id !== id);
+              const remaining = myCrafts.filter((craft) => craft._id !== id);
               setCrafts(remaining);
             }
           });
@@ -89,9 +89,9 @@ const MyCraftList = () => {
       </div>
 
       <div>
-        {myCrafts.length > 0 ? (
+        {myCrafts?.length > 0 ? (
           <div>
-            {myCrafts.map((craft) => (
+            {mySortingCrafts?.map((craft) => (
               <div
                 key={craft._id}
                 className="card card-side border p-2 md:p-6 lg:p-6 flex-col md:flex-row lg:flex-row items-center justify-evenly w-full md:w-2/3 lg:w-2/3 mx-auto gap-2 md:gap-6 lg:gap-6 mt-10"
