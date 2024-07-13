@@ -29,15 +29,13 @@ const AddCraft = () => {
       user_name,
     };
 
-    fetch("https://assignment-10-jute-home-decor-server.vercel.app/craft",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(newCraft),
-      }
-    )
+    fetch("https://assignment-11-online-group-study-server.vercel.app/craft", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newCraft),
+    })
       .then((res) => res.json())
       .then((data) => {
         // console.log(data)
@@ -57,8 +55,13 @@ const AddCraft = () => {
   };
   return (
     <div className="text-center mb-12">
-      <h2 className="mt-6 mb-6 font-bold text-2xl text-blue-800">Add a Craft</h2>
-      <form onSubmit={handleAddSubmit} className="w-full px-2 md:w-1/2 lg:w-1/2 mx-auto space-y-2">
+      <h2 className="mt-6 mb-6 font-bold text-2xl text-blue-800">
+        Add a Craft
+      </h2>
+      <form
+        onSubmit={handleAddSubmit}
+        className="w-full px-2 md:w-1/2 lg:w-1/2 mx-auto space-y-2"
+      >
         <label className="input input-bordered flex items-center gap-2">
           <input
             type="text"

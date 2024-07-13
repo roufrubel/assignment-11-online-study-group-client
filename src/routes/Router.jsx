@@ -42,12 +42,12 @@ const Router = createBrowserRouter([
         {
           path: "list",
           element: <PrivateRoute><MyCraftList></MyCraftList></PrivateRoute>,
-          loader: () => fetch("https://assignment-10-jute-home-decor-server.vercel.app/craft"), 
+          loader: () => fetch("https://assignment-11-online-group-study-server.vercel.app/craft"), 
         },
         {
           path: "craft/:id",
           element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
-          loader: () => fetch("https://assignment-10-jute-home-decor-server.vercel.app/craft"
+          loader: () => fetch("https://assignment-11-online-group-study-server.vercel.app/craft"
           ),
         },
         {

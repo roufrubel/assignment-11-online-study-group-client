@@ -26,9 +26,9 @@ const MyCraftList = () => {
           title: "Deleted!",
           text: "Your craft has been deleted.",
           icon: "success",
-        })
+        });
         fetch(
-          `https://assignment-10-jute-home-decor-server.vercel.app/craft/${id}`,
+          `https://assignment-11-online-group-study-server.vercel.app/craft/${id}`,
           {
             method: "DELETE",
           }
@@ -36,7 +36,7 @@ const MyCraftList = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-            if (data.deletedCount > 0) {              
+            if (data.deletedCount > 0) {
               const remaining = myCrafts.filter((craft) => craft._id !== id);
               setCrafts(remaining);
             }

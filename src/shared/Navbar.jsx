@@ -9,8 +9,8 @@ import './Navbar.css';
 const Navbar = () => {
     const {user, logOut} = useContext(AuthContext);
     
-    const currentUser = auth.currentUser;
-    console.log(currentUser)
+    // const currentUser = auth.currentUser;
+    // console.log(currentUser)
   
     const handleSignOut = () => {
       logOut()
