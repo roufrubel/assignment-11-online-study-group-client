@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { FcDepartment } from "react-icons/fc";
+import { FaBookOpenReader } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import auth from "../firebase/firebase.config";
+// import auth from "../firebase/firebase.config";
 import './Navbar.css';
 
 
@@ -37,7 +37,7 @@ const Navbar = () => {
           }
         </ul>
       </div>
-      <a className="btn btn-ghost flex items-center"><span className="md:mr-1 lg:mr-1 md:text-xl lg:text-xl hidden md:block lg:block"><FcDepartment/></span> <span className="text-red-700 md:text-lg lg:text-lg font-bold">JUTE DECOR</span></a>
+      <a className="btn btn-ghost flex items-center"><span className="md:mr-1 lg:mr-1 md:text-xl lg:text-xl hidden md:block lg:block"><FaBookOpenReader/></span> <span className="uppercase md:text-lg lg:text-lg font-extrabold">Group Study</span></a>
     </div>
     <div className="navbar-center hidden lg:flex">
       <ul className="menu menu-horizontal px-1">
