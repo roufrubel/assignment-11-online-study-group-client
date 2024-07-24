@@ -83,7 +83,26 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <>
-            <div
+          <div className="flex-none gap-2">
+    <div className="dropdown dropdown-end">
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+        <div className="w-10 rounded-full">
+          <img
+            alt="Profile"
+            src={user?.photoURL} />
+        </div>
+      </div>
+      <ul
+        tabIndex={0}
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow space-y-3">
+        <li><Link to="/pending">My Attempted Assignments</Link></li>
+        <li><button onClick={handleSignOut} className="btn">
+              Log Out
+            </button></li>
+      </ul>
+    </div>
+  </div>
+            {/* <div
               tabIndex={0}
               role="button"
               className="btn btn-ghost btn-circle avatar image-container"
@@ -94,8 +113,8 @@ const Navbar = () => {
               </div>
             </div>
             <button onClick={handleSignOut} className="btn">
-              Sign Out
-            </button>
+              Log Out
+            </button> */}
           </>
         ) : (
           <>
