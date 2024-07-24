@@ -56,7 +56,7 @@ const AddCraft = () => {
   return (
     <div className="text-center mb-12">
       <h2 className="mt-6 mb-6 font-bold text-2xl text-blue-800">
-        Add a Craft
+        Create Assignments
       </h2>
       <form
         onSubmit={handleAddSubmit}

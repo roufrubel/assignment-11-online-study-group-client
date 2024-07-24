@@ -62,7 +62,7 @@ const MyCraftList = () => {
   return (
     <div className="min-h-screen mb-10 ">
       <h2 className="text-center mt-6 mb-6 font-bold text-2xl text-blue-800">
-        My Craft List
+        Pending Assignments
       </h2>
 
       {/* filtering crafts */}

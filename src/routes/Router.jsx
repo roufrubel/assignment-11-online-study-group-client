@@ -32,15 +32,15 @@ const Router = createBrowserRouter([
             element: <Register></Register>
         },
         {
-          path: "add",
+          path: "create",
           element: <PrivateRoute><AddCraft></AddCraft></PrivateRoute>,
         },
         {
-            path: "allcraftlist",
+            path: "assignments",
             element: <AllCraftList></AllCraftList>,
         },
         {
-          path: "list",
+          path: "pending",
           element: <PrivateRoute><MyCraftList></MyCraftList></PrivateRoute>,
           loader: () => fetch("https://assignment-11-online-group-study-server.vercel.app/craft"), 
         },
