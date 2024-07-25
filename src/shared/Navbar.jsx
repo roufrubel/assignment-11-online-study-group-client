@@ -1,9 +1,10 @@
 import { useContext } from "react";
-import { FaBookOpenReader } from "react-icons/fa6";
+// import { FaBookOpenReader } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 // import auth from "../firebase/firebase.config";
 import "./Navbar.css";
+import logo from '../assets/logo.png'
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -67,9 +68,10 @@ const Navbar = () => {
         </div>
         <a className="btn btn-ghost flex items-center">
           <span className="md:mr-1 lg:mr-1 md:text-xl lg:text-xl hidden md:block lg:block">
-            <FaBookOpenReader />
+            {/* <FaBookOpenReader /> */}
+            <img className="w-8" src={logo} alt="" />
           </span>{" "}
-          <span className="uppercase md:text-lg lg:text-lg font-extrabold">
+          <span className="uppercase md:text-lg lg:text-lg font-extrabold text-indigo-500">
             Group Study
           </span>
         </a>
