@@ -7,11 +7,11 @@ import Home from "../pages/Home";
 import AllCraftList from "../pages/AllCraftList";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import AddCraft from "../pages/AddCraft";
 import MyCraftList from "../pages/MyCraftList";
 import PrivateRoute from "./PrivateRoute";
 import ViewDetails from "../pages/ViewDetails";
 import Update from "../pages/Update";
+import CreateAssignment from "../pages/CreateAssignment";
 
 const Router = createBrowserRouter([
     {
@@ -33,7 +33,7 @@ const Router = createBrowserRouter([
         },
         {
           path: "create",
-          element: <PrivateRoute><AddCraft></AddCraft></PrivateRoute>,
+          element: <PrivateRoute><CreateAssignment></CreateAssignment></PrivateRoute>,
         },
         {
             path: "assignments",

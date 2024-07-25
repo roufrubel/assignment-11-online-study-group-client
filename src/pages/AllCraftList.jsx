@@ -6,7 +6,7 @@ const AllCraftList = () => {
   const { loading } = useContext(AuthContext);
   const [crafts, setCrafts] = useState([]);
   const url =
-    "https://assignment-11-online-group-study-server.vercel.app/craft";
+    "https://assignment-11-online-group-study-server.vercel.app/assignment";
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())

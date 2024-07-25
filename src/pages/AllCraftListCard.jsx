@@ -15,10 +15,11 @@ const AllCraftListCard = ({ craft }) => {
     return (
       <tbody>
         <tr>
-          <td className="font-semibold">{craft.item_name}</td>
-          <td>${craft.price}</td>
-          <td>{craft.stockStatus}</td>
-          <td><Link to={`/craft/${_id}`}><button className="btn btn-circle btn-sm btn-outline font-bold"><GrView/></button></Link></td>
+          <td className="font-semibold">{craft.title}</td>
+          <td>${craft.marks}</td>
+          <td>{craft.difficulty}</td>
+          <td>{craft.date}</td>
+          <td><Link to={`/assignment/${_id}`}><button className="btn btn-circle btn-sm btn-outline font-bold"><GrView/></button></Link></td>
         </tr>
       </tbody>
     );
