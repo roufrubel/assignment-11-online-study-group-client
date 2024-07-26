@@ -42,17 +42,19 @@ const Router = createBrowserRouter([
         {
           path: "pending",
           element: <PrivateRoute><MyCraftList></MyCraftList></PrivateRoute>,
-          loader: () => fetch("https://assign-11-online-study-group.web.app/assignment"), 
+          loader: () => fetch("https://assignment-11-online-group-study-server.vercel.app/assignment"), 
         },
         {
           path: "assignment/:id",
           element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
-          loader: () => fetch("https://assign-11-online-study-group.web.app/assignment"
+          loader: () => fetch("https://assignment-11-online-group-study-server.vercel.app/assignment"
           ),
         },
         {
-          path: 'update',
+          path: 'update/:id',
           element: <PrivateRoute><Update></Update></PrivateRoute>,
+          loader: ({params}) => fetch(`https://assignment-11-online-group-study-server.vercel.app/update/${params.id}`
+          ),
         }
       ]
     },

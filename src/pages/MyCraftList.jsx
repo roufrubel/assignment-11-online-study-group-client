@@ -1,10 +1,12 @@
-import { useContext, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { FaChevronDown } from "react-icons/fa";
+import { useContext, useState } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 
 const MyCraftList = () => {
+ 
   const { user, loading } = useContext(AuthContext);
   const loadedCrafts = useLoaderData();
   const [crafts, setCrafts] = useState(loadedCrafts);
@@ -32,7 +34,7 @@ const MyCraftList = () => {
           icon: "success",
         });
         fetch(
-          `https://assign-11-online-study-group.web.app/assignment/${id}`,
+          `https://assignment-11-online-group-study-server.vercel.app/${id}`,
           {
             method: "DELETE",
           }

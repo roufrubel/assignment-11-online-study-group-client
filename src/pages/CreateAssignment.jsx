@@ -1,6 +1,6 @@
 import { useState } from "react";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 
 const CreateAssignment = () => {
@@ -127,8 +127,8 @@ const CreateAssignment = () => {
         <div className="input input-bordered input-primary flex items-center gap-2 ">
           <DatePicker
             selected={date}
-            onSelect={handleDateSelect} 
-            onChange={handleDateChange} 
+            onSelect={handleDateSelect}
+            onChange={handleDateChange}
             placeholderText="Select due date"
             className="grow"
           />
