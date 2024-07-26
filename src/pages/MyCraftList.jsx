@@ -5,11 +5,15 @@ import Swal from "sweetalert2";
 import { FaChevronDown } from "react-icons/fa";
 
 const MyCraftList = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const loadedCrafts = useLoaderData();
   const [crafts, setCrafts] = useState(loadedCrafts);
-  const myCrafts = crafts.filter((craft) => craft.user_email === user.email);
+  const myCrafts = crafts?.filter((craft) => craft.user_email === user.email);
   const [mySortingCrafts, setMySortingCrafts] = useState(myCrafts);
+
+  if (loading) {
+    return <p className="text-2xl text-amber-700">Loading....</p>;
+  }
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -28,7 +32,7 @@ const MyCraftList = () => {
           icon: "success",
         });
         fetch(
-          `https://assignment-11-online-group-study-server.vercel.app/craft/${id}`,
+          `https://assign-11-online-study-group.web.app/assignment/${id}`,
           {
             method: "DELETE",
           }
@@ -37,7 +41,7 @@ const MyCraftList = () => {
           .then((data) => {
             console.log(data);
             if (data.deletedCount > 0) {
-              const remaining = myCrafts.filter((craft) => craft._id !== id);
+              const remaining = myCrafts?.filter((craft) => craft._id !== id);
               setCrafts(remaining);
             }
           });

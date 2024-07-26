@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import AllCraftListCard from "./AllCraftListCard";
+import AssignmentCard from "./AssignmentCard";
 
-const AllCraftList = () => {
+const Assignments = () => {
   const { loading } = useContext(AuthContext);
   const [crafts, setCrafts] = useState([]);
-  const url =
-    "https://assignment-11-online-group-study-server.vercel.app/assignment";
+  const url = "https://assign-11-online-study-group.web.app/assignment";
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -36,10 +35,10 @@ const AllCraftList = () => {
                 </tr>
               </thead>
               {crafts.map((craft) => (
-                <AllCraftListCard
+                <AssignmentCard
                   key={craft._id}
                   craft={craft}
-                ></AllCraftListCard>
+                ></AssignmentCard>
               ))}
             </table>
           </div>
@@ -49,4 +48,4 @@ const AllCraftList = () => {
   );
 };
 
-export default AllCraftList;
+export default Assignments;

@@ -4,7 +4,7 @@ import { GrView } from "react-icons/gr";
 import { Link } from "react-router-dom";
 
 
-const AllCraftListCard = ({ craft }) => {
+const AssignmentCard = ({ craft }) => {
     const { loading } = useContext(AuthContext);
     const {_id} = craft;
  
@@ -25,4 +25,4 @@ const AllCraftListCard = ({ craft }) => {
     );
 };
 
-export default AllCraftListCard;
+export default AssignmentCard;
