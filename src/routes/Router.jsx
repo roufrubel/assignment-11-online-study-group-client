@@ -53,8 +53,7 @@ const Router = createBrowserRouter([
         {
           path: 'update/:id',
           element: <PrivateRoute><Update></Update></PrivateRoute>,
-          loader: ({params}) => fetch(`https://assignment-11-online-group-study-server.vercel.app/update/${params.id}`
-          ),
+          loader: ({params}) => fetch(`https://assignment-11-online-group-study-server.vercel.app/assignment/${params.id}`),
         }
       ]
     },

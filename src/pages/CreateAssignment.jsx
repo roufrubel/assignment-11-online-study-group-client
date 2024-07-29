@@ -38,7 +38,7 @@ const CreateAssignment = () => {
       date,
       user_email,
     };
-    console.log(newAssignment);
+    // console.log(newAssignment);
 
     fetch(
       "https://assignment-11-online-group-study-server.vercel.app/assignment",
@@ -56,7 +56,7 @@ const CreateAssignment = () => {
         if (data.insertedId) {
           Swal.fire({
             title: "Success!",
-            text: "Craft added successfully",
+            text: "Assignment added successfully",
             icon: "success",
             confirmButtonText: "cool",
           });
