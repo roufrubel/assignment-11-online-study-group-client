@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
@@ -8,6 +8,9 @@ const Update = () => {
     const assignment = useLoaderData()
     const [difficulty, setDifficulty] = useState(assignment.difficulty || "");
     const [date, setDate] = useState(new Date(assignment.date) || null);
+
+    const location = useLocation();
+    const navigate = useNavigate();
    
   
     const handleDifficulty = (e) => {
@@ -68,6 +71,8 @@ const Update = () => {
           if (data.modifiedCount > 0) {
             form.reset();
           }
+           // navigate after updated assignment
+           navigate(location?.state ? location.state : '/assignment');
         });
     };
     
