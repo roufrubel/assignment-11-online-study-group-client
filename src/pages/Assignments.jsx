@@ -129,7 +129,7 @@ const Assignments = () => {
                     <img
                       className="rounded-xl"
                       src={assignment.image}
-                      alt="craft"
+                      alt="assignment"
                     />
                   </figure>
                 </div>
@@ -172,7 +172,7 @@ const Assignments = () => {
               >
                 <div className="w-full md:w-3/5 lg:w-3/5">
                   <figure>
-                    <img className="rounded-xl" src={assignment.image} alt="craft" />
+                    <img className="rounded-xl" src={assignment.image} alt="assignment" />
                   </figure>
                 </div>
                 <div>
@@ -195,6 +195,7 @@ const Assignments = () => {
                     >
                       <MdDeleteForever />
                     </button>
+                    
                     <Link to={`/assignment/${assignment._id}`}>
                       <button className="btn btn-circle btn-sm btn-outline font-bold btn-primary">
                         <GrView />
