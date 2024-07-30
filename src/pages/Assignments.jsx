@@ -8,7 +8,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 
 const Assignments = () => {
-  const { loading } = useContext(AuthContext);
+  const { loading, user } = useContext(AuthContext);
   const [assignments, setAssignments] = useState([]);
   
   // console.log(deletedAssignment);
@@ -43,7 +43,7 @@ const Assignments = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           fetch(
-            `https://assignment-11-online-group-study-server.vercel.app/assignment?id=${id}&email=${email}`,
+            `https://assignment-11-online-group-study-server.vercel.app/assignment/${id}?email=${email}`,
             {
               method: "DELETE",
             }
@@ -58,7 +58,7 @@ const Assignments = () => {
                   setMySortingAssignments(remaining);
                   Swal.fire("Deleted!", "Your assignment has been deleted.", "success");
               } else {
-                Swal.fire("Error!", "Failed to delete the assignment.", "error");
+                Swal.fire("Error!", data.message, "error");
               }
             });
         }
@@ -190,7 +190,7 @@ const Assignments = () => {
                       </button>
                     </Link>
                     <button
-                      onClick={() => handleDelete(assignment._id)}
+                      onClick={() => handleDelete(assignment._id, user?.email)}
                       className="btn btn-circle btn-sm btn-outline font-bold btn-primary text-lg"
                     >
                       <MdDeleteForever />
