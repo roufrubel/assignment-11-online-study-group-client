@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../providers/AuthProvider";
 
 const CreateAssignment = () => {
+  const { user } = useContext(AuthContext);
   const [difficulty, setDifficulty] = useState("");
   const [date, setDate] = useState(null);
+
+  const location = useLocation();
+    const navigate = useNavigate();
 
   const handleDifficulty = (e) => {
     const difficultyText = e.target.value;
@@ -65,6 +71,8 @@ const CreateAssignment = () => {
         if (data.insertedId) {
           form.reset();
         }
+        // navigate after updated assignment
+        navigate(location?.state ? location.state : '/assignment');
       });
   };
   return (
@@ -139,7 +147,7 @@ const CreateAssignment = () => {
             type="text"
             className="grow"
             name="userEmail"
-            placeholder="user email"
+            defaultValue={user.email}
           />
         </label>
 

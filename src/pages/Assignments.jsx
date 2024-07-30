@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { GrView } from "react-icons/gr";
@@ -9,72 +9,79 @@ import { MdDeleteForever } from "react-icons/md";
 
 const Assignments = () => {
   const { loading } = useContext(AuthContext);
-  const [crafts, setCrafts] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  
+  // console.log(deletedAssignment);
 
-  const [mySortingCrafts, setMySortingCrafts] = useState(crafts);
+  const [mySortingAssignments, setMySortingAssignments] = useState([]);
 
   const url =
     "https://assignment-11-online-group-study-server.vercel.app/assignment";
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setCrafts(data));
-  }, [crafts]);
+      .then((data) => {
+        setAssignments(data);
+        setMySortingAssignments(data); 
+      });
+  }, []);
 
   if (loading) {
     return <p className="text-2xl text-amber-700">Loading....</p>;
   }
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to delete this craft?",
+
+  const handleDelete = (id, email) => {
+      Swal.fire({
+        title: "Are you sure?",
+      text: "Do you want to delete this assignment?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your craft has been deleted.",
-          icon: "success",
-        });
-        fetch(
-          `https://assignment-11-online-group-study-server.vercel.app/${id}`,
-          {
-            method: "DELETE",
-          }
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.deletedCount > 0) {
-              const remaining = crafts?.filter((craft) => craft._id !== id);
-              setCrafts(remaining);
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(
+            `https://assignment-11-online-group-study-server.vercel.app/assignment?id=${id}&email=${email}`,
+            {
+              method: "DELETE",
             }
-          });
-      }
-    });
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              // console.log(data);
+              if (data.deletedCount > 0) {
+                const remaining = assignments?.filter(
+                  (assignment) => assignment._id !== id);
+                  setAssignments(remaining);
+                  setMySortingAssignments(remaining);
+                  Swal.fire("Deleted!", "Your assignment has been deleted.", "success");
+              } else {
+                Swal.fire("Error!", "Failed to delete the assignment.", "error");
+              }
+            });
+        }
+      });
   };
 
+
   const handleFilter = (filter) => {
-    let filteredCrafts = [];
+    let filteredAssignment = [];
     if (filter === "easy") {
-      filteredCrafts = crafts.filter(
-        (craft) => craft.difficulty.toLowerCase() === "easy"
+      filteredAssignment = assignments.filter(
+        (assignment) => assignment.difficulty.toLowerCase() === "easy"
       );
     } else if (filter === "medium") {
-      filteredCrafts = crafts.filter(
-        (craft) => craft.difficulty.toLowerCase() === "medium"
+      filteredAssignment = assignments.filter(
+        (assignment) => assignment.difficulty.toLowerCase() === "medium"
       );
     } else if (filter === "hard") {
-      filteredCrafts = crafts.filter(
-        (craft) => craft.difficulty.toLowerCase() === "hard"
+      filteredAssignment = assignments.filter(
+        (assignment) => assignment.difficulty.toLowerCase() === "hard"
       );
     }
-    setMySortingCrafts(filteredCrafts);
+    setMySortingAssignments(filteredAssignment);
   };
 
   return (
@@ -83,7 +90,7 @@ const Assignments = () => {
         - Assignments -
       </h2>
 
-      {/* filtering crafts */}
+      {/* filtering assignments */}
       <div className="dropdown dropdown-bottom flex justify-center">
         <div
           tabIndex={0}
@@ -110,35 +117,47 @@ const Assignments = () => {
       </div>
 
       <div>
-        {mySortingCrafts.length === 0 ? (
+        {mySortingAssignments.length === 0 ? (
           <div>
-            { crafts.map((craft) => (
+            {assignments.map((assignment) => (
               <div
-                key={craft._id}
+                key={assignment._id}
                 className="card card-side border border-indigo-300 p-2 md:p-6 lg:p-6 flex-col md:flex-row lg:flex-row items-center justify-start w-full md:w-2/3 lg:w-2/3 mx-auto gap-2 md:gap-6 lg:gap-6 mt-10"
               >
                 <div className="w-full md:w-3/5 lg:w-3/5">
                   <figure>
-                    <img className="rounded-xl" src={craft.image} alt="craft" />
+                    <img
+                      className="rounded-xl"
+                      src={assignment.image}
+                      alt="craft"
+                    />
                   </figure>
                 </div>
-                <div >
+                <div>
                   <div className="space-y-3">
-                  <h2 className="card-title text-indigo-600">{craft.title}</h2>
-                  <p>Marks: {craft.marks}</p>
-                  <p>Difficulty: {craft.difficulty}</p>
+                    <h2 className="card-title text-indigo-600">
+                      {assignment.title}
+                    </h2>
+                    <p>Marks: {assignment.marks}</p>
+                    <p>Difficulty: {assignment.difficulty}</p>
                   </div>
                   <div className="flex items-center justify-around gap-4 mt-12">
-                    <Link to={`/update/${craft._id}`}>
-                      <button className="btn btn-circle btn-sm btn-outline font-bold btn-primary"><FaRegEdit/></button>
+                    <Link to={`/update/${assignment._id}`}>
+                      <button className="btn btn-circle btn-sm btn-outline font-bold btn-primary">
+                        <FaRegEdit />
+                      </button>
                     </Link>
                     <button
-                      onClick={() => handleDelete(craft._id)}
+                      onClick={() => handleDelete(assignment._id, assignment.user_email)}
                       className="btn btn-circle btn-sm btn-outline font-bold btn-primary text-lg"
                     >
-                      <MdDeleteForever/>
+                      <MdDeleteForever />
                     </button>
-                    <Link to={`/assignment/${craft._id}`}><button className="btn btn-circle btn-sm btn-outline font-bold btn-primary"><GrView/></button></Link>
+                    <Link to={`/assignment/${assignment._id}`}>
+                      <button className="btn btn-circle btn-sm btn-outline font-bold btn-primary">
+                        <GrView />
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -146,33 +165,41 @@ const Assignments = () => {
           </div>
         ) : (
           <div>
-            { mySortingCrafts.map((craft) => (
+            {mySortingAssignments.map((assignment) => (
               <div
-                key={craft._id}
+                key={assignment._id}
                 className="card card-side border border-indigo-300 p-2 md:p-6 lg:p-6 flex-col md:flex-row lg:flex-row items-center justify-start w-full md:w-2/3 lg:w-2/3 mx-auto gap-2 md:gap-6 lg:gap-6 mt-10"
               >
                 <div className="w-full md:w-3/5 lg:w-3/5">
                   <figure>
-                    <img className="rounded-xl" src={craft.image} alt="craft" />
+                    <img className="rounded-xl" src={assignment.image} alt="craft" />
                   </figure>
                 </div>
-                <div >
+                <div>
                   <div className="space-y-3">
-                  <h2 className="card-title text-indigo-600">{craft.title}</h2>
-                  <p>Marks: {craft.marks}</p>
-                  <p>Difficulty: {craft.difficulty}</p>
+                    <h2 className="card-title text-indigo-600">
+                      {assignment.title}
+                    </h2>
+                    <p>Marks: {assignment.marks}</p>
+                    <p>Difficulty: {assignment.difficulty}</p>
                   </div>
                   <div className="flex items-center justify-around gap-4 mt-12">
-                    <Link to={`/update/${craft._id}`}>
-                      <button className="btn btn-circle btn-sm btn-outline font-bold btn-primary"><FaRegEdit/></button>
+                    <Link to={`/update/${assignment._id}`}>
+                      <button className="btn btn-circle btn-sm btn-outline font-bold btn-primary">
+                        <FaRegEdit />
+                      </button>
                     </Link>
                     <button
-                      onClick={() => handleDelete(craft._id)}
+                      onClick={() => handleDelete(assignment._id)}
                       className="btn btn-circle btn-sm btn-outline font-bold btn-primary text-lg"
                     >
-                      <MdDeleteForever/>
+                      <MdDeleteForever />
                     </button>
-                    <Link to={`/assignment/${craft._id}`}><button className="btn btn-circle btn-sm btn-outline font-bold btn-primary"><GrView/></button></Link>
+                    <Link to={`/assignment/${assignment._id}`}>
+                      <button className="btn btn-circle btn-sm btn-outline font-bold btn-primary">
+                        <GrView />
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -185,4 +212,3 @@ const Assignments = () => {
 };
 
 export default Assignments;
-
