@@ -106,10 +106,9 @@ const ViewDetails = () => {
           >
             <div className="modal-box">
               <div>
-                <h3 className="font-semibold text-xl text-indigo-600">
+                <h3 className="font-semibold text-xl text-indigo-600 mb-4">
                   Provide Pdf/Doc link here!
                 </h3>
-                <h2>{title}</h2>
                 <form onSubmit={handleSubmitAssignment}>
                   <label className="input input-bordered flex items-center gap-2 my-4">
                     Pdf/Doc link
@@ -123,7 +122,7 @@ const ViewDetails = () => {
                   <textarea
                     name="quickNote"
                     placeholder="Write your quick note here"
-                    className="textarea textarea-bordered textarea-xs w-full max-w-xs"
+                    className="textarea textarea-bordered textarea-xs w-full"
                   ></textarea>
                   <button className="btn btn-primary mt-6">
                     <input type="submit" value="Submit Assignment" />

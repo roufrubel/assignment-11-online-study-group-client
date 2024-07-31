@@ -14,7 +14,7 @@ const Submitted = () => {
   }
 
   return (
-    <>
+    <div className="mb-20">
     <h2 className="text-center mt-6 mb-10 font-bold text-2xl text-indigo-600">- My Attempted Assignments -</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
       {mySubmittedAssignments.map((data) => (
@@ -31,7 +31,7 @@ const Submitted = () => {
 </div>
       ))}
     </div>
-    </>
+    </div>
   );
 };
 
