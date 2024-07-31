@@ -96,8 +96,8 @@ const Navbar = () => {
       </div>
       <ul
         tabIndex={0}
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow space-y-3">
-        <li><Link to="/pending">My Attempted Assignments</Link></li>
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-3 shadow space-y-4">
+        <li className="bg-slate-100 rounded-lg"><Link to="/submit" className="text-center">My Attempted Assignments</Link></li>
         <li><button onClick={handleSignOut} className="btn">
               Log Out
             </button></li>

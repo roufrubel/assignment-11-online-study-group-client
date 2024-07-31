@@ -1,17 +1,74 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import {
+  useLoaderData,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import moment from "moment";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const ViewDetails = () => {
   const assignments = useLoaderData();
+  const { loading, user } = useContext(AuthContext);
   const { id } = useParams();
   const assignment = assignments?.find((assignment) => assignment._id === id);
   const { image, title, marks, description, difficulty, date } = assignment;
+  const userEmail = user.email;
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // date formatting with moment js
   const originalDate = date;
 
   // Format the date
   const formattedDate = moment(originalDate).format("YYYY-MM-DD");
+
+  const handleSubmitAssignment = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const docLink = form.docLink.value;
+    const quickNote = form.quickNote.value;
+    const submittedAssignment = {
+      assignment,
+      userEmail,
+      docLink,
+      quickNote,
+    };
+    // console.log(submittedAssignment);
+    fetch(
+      "https://assignment-11-online-group-study-server.vercel.app/submit",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(submittedAssignment),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        if (data.insertedId) {
+          Swal.fire("Submitted!", "Your assignment has been submitted.", "success");
+          // navigate after submitted assignment
+        navigate(location?.state ? location.state : '/');
+        }
+
+        if (data.insertedId) {
+          form.reset();
+        }        
+      })
+      .catch((error) => {
+        Swal.fire("Error!", "There was an error submitting your assignment.", error);
+      });
+  };
+
+  if (loading) {
+    return <p className="text-2xl text-amber-700">Loading....</p>;
+  }
 
   return (
     <div className="mt-4 mb-6 p-2">
@@ -36,7 +93,7 @@ const ViewDetails = () => {
 
         <div>
           <button
-            className="btn btn-primary text-md"
+            className="btn  bg-slate-200 hover:bg-indigo-600 btn-block text-indigo-600 hover:text-white text-md"
             onClick={() =>
               document.getElementById("take-assignment-modal").showModal()
             }
@@ -50,17 +107,23 @@ const ViewDetails = () => {
             <div className="modal-box">
               <div>
                 <h3 className="font-semibold text-xl text-indigo-600">
-                  Attach your file here!
+                  Provide Pdf/Doc link here!
                 </h3>
-                <form>
-                  <input
-                    type="file"
-                    className="file-input file-input-bordered file-input-sm w-full max-w-xs mt-10 mb-6"
-                  />
-
+                <h2>{title}</h2>
+                <form onSubmit={handleSubmitAssignment}>
+                  <label className="input input-bordered flex items-center gap-2 my-4">
+                    Pdf/Doc link
+                    <input
+                      type="text"
+                      name="docLink"
+                      className="grow"
+                      placeholder="provide your pdf/ doc link here"
+                    />
+                  </label>
                   <textarea
-                    placeholder="quick note"
-                    className="textarea textarea-bordered textarea-sm w-full max-w-xs "
+                    name="quickNote"
+                    placeholder="Write your quick note here"
+                    className="textarea textarea-bordered textarea-xs w-full max-w-xs"
                   ></textarea>
                   <button className="btn btn-primary mt-6">
                     <input type="submit" value="Submit Assignment" />
