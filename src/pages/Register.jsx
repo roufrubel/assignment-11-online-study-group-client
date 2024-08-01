@@ -143,7 +143,7 @@ const Register = () => {
               {/* {
                 registerError && alert(registerError)
               } */}
-          <div className="w-3/5 mx-auto mt-10">
+          <div className="w-full md:w-3/5 lg:w-3/5 mx-auto mt-10 p-1">
               <div className="bg-slate-100 p-6">
                <h4 className="text-center">Please Register</h4>
           <form onSubmit={handleRegister}>

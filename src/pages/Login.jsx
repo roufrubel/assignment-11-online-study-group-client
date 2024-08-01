@@ -137,7 +137,7 @@ const Login = () => {
               {/* {
                 loginError && alert(loginError)
               } */}
-            <div className="w-3/5  mx-auto mt-10">
+            <div className="w-full md:w-3/5 lg:w-3/5  mx-auto mt-10 px-1">
                 <div className="bg-slate-100 p-6">
                     <h4 className="text-center">Please Login</h4>
             <form onSubmit={handleLogin}>

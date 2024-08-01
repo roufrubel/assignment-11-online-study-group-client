@@ -49,6 +49,10 @@ const Router = createBrowserRouter([
             <PendingAssignments></PendingAssignments>
           </PrivateRoute>
         ),
+        loader: () =>
+          fetch(
+            "https://assignment-11-online-group-study-server.vercel.app/submit"
+          ),
       },
       {
         path: "submit",
