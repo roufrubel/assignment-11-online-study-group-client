@@ -104,7 +104,7 @@ const CreateAssignment = () => {
 
         <label className="input input-bordered input-primary flex items-center gap-2">
           <input
-            type="text"
+            type="number"
             className="grow"
             name="marks"
             placeholder="marks"

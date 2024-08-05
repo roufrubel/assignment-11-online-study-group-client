@@ -14,7 +14,7 @@ const ViewDetails = () => {
   const { loading, user } = useContext(AuthContext);
   const { id } = useParams();
   const assignment = assignments?.find((assignment) => assignment._id === id);
-  const { image, title, marks, description, difficulty, date } = assignment;
+  const {image, title, marks, description, difficulty, date } = assignment;
   const userEmail = user.email;
 
   const location = useLocation();
@@ -32,7 +32,9 @@ const ViewDetails = () => {
     const docLink = form.docLink.value;
     const quickNote = form.quickNote.value;
     const submittedAssignment = {
-      assignment,
+      // _id: assignment._id,
+      title: assignment.title,
+      marks: assignment.marks,
       userEmail,
       docLink,
       quickNote,
