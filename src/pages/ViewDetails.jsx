@@ -14,7 +14,7 @@ const ViewDetails = () => {
   const { loading, user } = useContext(AuthContext);
   const { id } = useParams();
   const assignment = assignments?.find((assignment) => assignment._id === id);
-  const {image, title, marks, description, difficulty, date } = assignment;
+  const { image, title, marks, description, difficulty, date } = assignment;
   const userEmail = user.email;
 
   const location = useLocation();
@@ -40,31 +40,36 @@ const ViewDetails = () => {
       quickNote,
     };
     // console.log(submittedAssignment);
-    fetch(
-      "https://assignment-11-online-group-study-server.vercel.app/submit",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(submittedAssignment),
-      }
-    )
+    fetch("https://assignment-11-online-group-study-server.vercel.app/submit", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(submittedAssignment),
+    })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         if (data.insertedId) {
-          Swal.fire("Submitted!", "Your assignment has been submitted.", "success");
+          Swal.fire(
+            "Submitted!",
+            "Your assignment has been submitted.",
+            "success"
+          );
           // navigate after submitted assignment
-        navigate(location?.state ? location.state : '/');
+          navigate(location?.state ? location.state : "/");
         }
 
         if (data.insertedId) {
           form.reset();
-        }        
+        }
       })
       .catch((error) => {
-        Swal.fire("Error!", "There was an error submitting your assignment.", error);
+        Swal.fire(
+          "Error!",
+          "There was an error submitting your assignment.",
+          error
+        );
       });
   };
 
@@ -112,15 +117,14 @@ const ViewDetails = () => {
                   Provide Pdf/Doc link here!
                 </h3>
                 <form onSubmit={handleSubmitAssignment}>
-                  <label className="input input-bordered flex items-center gap-2 my-4">
-                    Pdf/Doc link
+                  <div className="pt-3 pb-5">
+                    <span className="font-bold">Attach Pdf/Doc : </span>
                     <input
-                      type="text"
+                      type="file"
+                      className="file-input file-input-bordered file-input-sm w-full max-w-xs ml-2"
                       name="docLink"
-                      className="grow"
-                      placeholder="provide your pdf/ doc link here"
                     />
-                  </label>
+                  </div>
                   <textarea
                     name="quickNote"
                     placeholder="Write your quick note here"

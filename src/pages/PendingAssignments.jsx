@@ -57,7 +57,7 @@ const PendingAssignments = () => {
     const submittedMarkFeedBack = {
       obtainedMark,
       feedBack,
-      status: 'complete'
+      status: "complete",
     };
     // console.log(submittedMarkFeedBack);
 
@@ -86,17 +86,24 @@ const PendingAssignments = () => {
           const newAssignment = [completedAssignment, ...remaining];
           setPendingAssignments(newAssignment);
 
-            Swal.fire("Submitted!", "Mark and FeedBack has been submitted.", "success");
-            // navigate after submitted assignment
-          navigate(location?.state ? location.state : '/');
+          Swal.fire(
+            "Submitted!",
+            "Mark and FeedBack has been submitted.",
+            "success"
+          );
+          // navigate after submitted assignment
+          navigate(location?.state ? location.state : "/");
         }
       })
-    .catch((error) => {
-      Swal.fire("Error!", "There was an error submitting Mark and FeedBack.", error);
-    });
+      .catch((error) => {
+        Swal.fire(
+          "Error!",
+          "There was an error submitting Mark and FeedBack.",
+          error
+        );
+      });
   };
-   
-  
+
   return (
     <div className="mb-20">
       <h2 className="text-center mt-6 mb-10 font-bold text-2xl text-indigo-600">
@@ -115,94 +122,123 @@ const PendingAssignments = () => {
             </tr>
           </thead>
           <tbody>
-            {pendingAssignments?.filter((assignment) => assignment.status !== "complete")?.map((data) => (
-              <tr key={data._id}>
-                <td className="font-bold">{data?.title}</td>
-                <td>{data?.marks}</td>
-                <td>{user?.displayName}</td>
-                <td>
-                  <div>
-                    <button
-                      className="btn btn-primary btn-xs"
-                      onClick={() =>
-                        document
-                          .getElementById("take-assignment-modal")
-                          .showModal()
-                      }
-                    >
-                      Give Mark
-                    </button>
-                    <dialog
-                      id="take-assignment-modal"
-                      className="modal modal-bottom sm:modal-middle"
-                    >
-                      <div className="modal-box">
-                        <div>
-                          <h3 className="font-semibold text-xl text-indigo-600 mb-4">
-                            Give mark and feedback here!
-                          </h3>
-                          <div className="p-2  rounded-lg border border-purple-400">
-                            <p className="mb-2 bg-indigo-100 rounded-lg p-2">
-                              <span className="font-bold">PDF/DOC LINK:</span>{" "}
-                              {data?.docLink}
-                            </p>
-                            <p className="bg-indigo-100 rounded-lg p-2">
-                              <span className="font-bold">NOTE:</span>{" "}
-                              {data?.quickNote}
-                            </p>
-                          </div>
-                          <form onSubmit={(e) => handleSubmitMarkFeedBack(e, data._id)}>
-                            <label className="input input-bordered flex items-center gap-2 my-4">
-                              Mark
-                              <input
-                                type="number"
-                                name="obtainedMark"
-                                className="grow"
-                                placeholder="Give mark here"
-                              />
-                            </label>
-                            <textarea
-                              name="feedBack"
-                              placeholder="Write your FeedBack here"
-                              className="textarea textarea-bordered textarea-xs w-full"
-                            ></textarea>
-                            <button
-                              className="btn btn-primary mt-6"
+            {pendingAssignments
+              ?.filter((assignment) => assignment.status !== "complete")
+              ?.map((data) => (
+                <tr key={data._id}>
+                  <td className="font-bold">{data?.title}</td>
+                  <td>{data?.marks}</td>
+                  <td>{user?.displayName}</td>
+                  <td>
+                    <div>
+                      <button
+                        className="btn btn-primary btn-xs"
+                        onClick={() =>
+                          document
+                            .getElementById("take-assignment-modal")
+                            .showModal()
+                        }
+                      >
+                        Give Mark
+                      </button>
+                      <dialog
+                        id="take-assignment-modal"
+                        className="modal modal-bottom sm:modal-middle"
+                      >
+                        <div className="modal-box">
+                          <div>
+                            <h3 className="font-semibold text-xl text-indigo-600 mb-4">
+                              Give mark and feedback here!
+                            </h3>
+                            <div className="p-2  rounded-lg border border-purple-400">
+                              <div className="mb-2 bg-indigo-100 rounded-lg p-2">
+                                <span className="font-bold">PDF/DOC LINK:</span>{" "}
+                                {data?.docLink?.endsWith(".pdf") ? (
+                                  <div className="pdf-preview mb-4">
+                                    <iframe
+                                      src={data?.docLink}
+                                      title="PDF Preview"
+                                      width="100%"
+                                      height="200px"
+                                      className="border border-gray-300 rounded-lg"
+                                    ></iframe>
+                                  </div>
+                                ) : data?.docLink?.endsWith(".doc") ||
+                                  data?.docLink?.endsWith(".docx") ? (
+                                  <div className="doc-preview mb-4">
+                                    <iframe
+                                      src={data?.docLink}
+                                      title="DOC Preview"
+                                      width="100%"
+                                      height="200px"
+                                      className="border border-gray-300 rounded-lg"
+                                    ></iframe>
+                                  </div>
+                                ) : (
+                                  <div className="pdf-preview mb-4">
+                                    <p>No file added</p>
+                                  </div>
+                                )}
+                              </div>
+                              <p className="bg-indigo-100 rounded-lg p-2">
+                                <span className="font-bold">NOTE:</span>{" "}
+                                {data?.quickNote}
+                              </p>
+                            </div>
+                            <form
+                              onSubmit={(e) =>
+                                handleSubmitMarkFeedBack(e, data._id)
+                              }
                             >
-                              <input
-                                type="submit"
-                                value="Submit Mark and FeedBack"
-                              />
-                            </button>
-                          </form>
+                              <label className="input input-bordered flex items-center gap-2 my-4">
+                                Mark
+                                <input
+                                  type="number"
+                                  name="obtainedMark"
+                                  className="grow"
+                                  placeholder="Give mark here"
+                                />
+                              </label>
+                              <textarea
+                                name="feedBack"
+                                placeholder="Write your FeedBack here"
+                                className="textarea textarea-bordered textarea-xs w-full"
+                              ></textarea>
+                              <button className="btn btn-primary mt-6">
+                                <input
+                                  type="submit"
+                                  value="Submit Mark and FeedBack"
+                                />
+                              </button>
+                            </form>
+                          </div>
+                          <div className="modal-action">
+                            <form method="dialog">
+                              <button className="btn btn-sm btn-circle btn-primary absolute right-2 top-2">
+                                ✕
+                              </button>
+                            </form>
+                          </div>
                         </div>
-                        <div className="modal-action">
-                          <form method="dialog">
-                            <button className="btn btn-sm btn-circle btn-primary absolute right-2 top-2">
-                              ✕
-                            </button>
-                          </form>
-                        </div>
-                      </div>
-                    </dialog>
-                  </div>
-                </td>
-                <td>
-                  {data.status === "complete" ? (
-                    <span className="font-bold text-primary">Completed</span>
-                  ) : data.status === "confirm" ? (
-                    <span className="font-bold text-primary">Confirmed</span>
-                  ) : (
-                    <button
-                      onClick={() => handleConfirm(data?._id)}
-                      className="btn btn-primary btn-xs"
-                    >
-                      Please Confirm
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
+                      </dialog>
+                    </div>
+                  </td>
+                  <td>
+                    {data.status === "complete" ? (
+                      <span className="font-bold text-primary">Completed</span>
+                    ) : data.status === "confirm" ? (
+                      <span className="font-bold text-primary">Confirmed</span>
+                    ) : (
+                      <button
+                        onClick={() => handleConfirm(data?._id)}
+                        className="btn btn-primary btn-xs"
+                      >
+                        Please Confirm
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
