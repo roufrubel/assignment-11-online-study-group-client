@@ -115,14 +115,12 @@ const PendingAssignments = () => {
             </tr>
           </thead>
           <tbody>
-            {pendingAssignments?.map((data) => (
+            {pendingAssignments?.filter((assignment) => assignment.status !== "complete")?.map((data) => (
               <tr key={data._id}>
                 <td className="font-bold">{data?.title}</td>
                 <td>{data?.marks}</td>
                 <td>{user?.displayName}</td>
                 <td>
-                  {/* <button className="btn btn-primary btn-xs">Give Mark</button> */}
-
                   <div>
                     <button
                       className="btn btn-primary btn-xs"
@@ -169,7 +167,6 @@ const PendingAssignments = () => {
                               className="textarea textarea-bordered textarea-xs w-full"
                             ></textarea>
                             <button
-                              // onClick={() => handleSubmitMarkFeedBack(data._id)}
                               className="btn btn-primary mt-6"
                             >
                               <input
