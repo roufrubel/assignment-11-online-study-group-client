@@ -42,10 +42,7 @@ const ViewDetails = () => {
     // console.log(submittedAssignment);
     fetch("https://assignment-11-online-group-study-server.vercel.app/submit", {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(submittedAssignment),
+      body: submittedAssignment,
     })
       .then((res) => res.json())
       .then((data) => {
