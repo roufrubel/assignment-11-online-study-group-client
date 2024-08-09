@@ -29,16 +29,16 @@ const ViewDetails = () => {
   const handleSubmitAssignment = (e) => {
     e.preventDefault();
     const form = e.target;
-    const docLink = form.docLink.value;
-    const quickNote = form.quickNote.value;
-    const submittedAssignment = {
-      // _id: assignment._id,
-      title: assignment.title,
-      marks: assignment.marks,
-      userEmail,
-      docLink,
-      quickNote,
-    };
+  const docFile = form.docLink.files[0];
+  const quickNote = form.quickNote.value;
+
+  const submittedAssignment = new FormData();
+  submittedAssignment.append('docLink', docFile);
+  submittedAssignment.append('quickNote', quickNote);
+  submittedAssignment.append('title', assignment.title);
+  submittedAssignment.append('marks', assignment.marks);
+  submittedAssignment.append('userEmail', userEmail);
+
     // console.log(submittedAssignment);
     fetch("https://assignment-11-online-group-study-server.vercel.app/submit", {
       method: "POST",
