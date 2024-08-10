@@ -144,19 +144,19 @@ const Register = () => {
                 registerError && alert(registerError)
               } */}
           <div className="w-full md:w-3/5 lg:w-3/5 mx-auto mt-10 p-1">
-              <div className="bg-slate-100 p-6">
-               <h4 className="text-center">Please Register</h4>
+              <div className="bg-slate-100 p-10 rounded-xl">
+               <h4 className="text-center text-lg font-bold mb-2">Please Register</h4>
           <form onSubmit={handleRegister}>
-            <input className="w-full" type="text" name="name" placeholder="your name" id="" /><br /><br/>
-            <input className="w-full" type="text" name="photo" placeholder="your photo" id="" /><br /><br/>
-            <input className="w-full"  type="email" name="email" placeholder="your email" id="" /><br /><br/>
-            <input className="w-full" 
+            <input className="input input-bordered w-full" type="text" name="name" placeholder="your name" id="" /><br /><br/>
+            <input className="input input-bordered w-full" type="text" name="photo" placeholder="your photo" id="" /><br /><br/>
+            <input className="input input-bordered w-full"  type="email" name="email" placeholder="your email" id="" /><br /><br/>
+            <input className="input input-bordered w-full" 
             type={view? "text" : "password" }
             name="password" 
             placeholder="your password" id="" /> 
-            <span className="flex justify-end -mt-5 mr-2" onClick={() => setView(!view)}>{view ? <FaEye/> : <FaEyeSlash/>}</span>
+            <span className="flex justify-end -mt-8 mr-2" onClick={() => setView(!view)}>{view ? <FaEye/> : <FaEyeSlash/>}</span>
             <br /><br/>
-            <input  className="w-full bg-blue-200 font-semibold cursor-pointer" type="submit" value="Submit" />
+            <input  className="w-full bg-blue-200 font-semibold cursor-pointer py-2 rounded-xl" type="submit" value="Submit" />
           </form>
           <p className="mt-6">Already have account? <Link to='/login' className="text-blue-700 font-semibold">Login</Link></p>
         </div>

@@ -152,33 +152,8 @@ const PendingAssignments = () => {
                             </h3>
                             <div className="p-2  rounded-lg border border-purple-400">
                               <div className="mb-2 bg-indigo-100 rounded-lg p-2">
-                                <span className="font-bold">PDF/DOC LINK:</span>{" "}
-                                {data?.docLink?.endsWith(".pdf") ? (
-                                  <div className="pdf-preview mb-4">
-                                    <iframe
-                                      src={data?.docLink}
-                                      title="PDF Preview"
-                                      width="100%"
-                                      height="200px"
-                                      className="border border-gray-300 rounded-lg"
-                                    ></iframe>
-                                  </div>
-                                ) : data?.docLink?.endsWith(".doc") ||
-                                  data?.docLink?.endsWith(".docx") ? (
-                                  <div className="doc-preview mb-4">
-                                    <iframe
-                                      src={data?.docLink}
-                                      title="DOC Preview"
-                                      width="100%"
-                                      height="200px"
-                                      className="border border-gray-300 rounded-lg"
-                                    ></iframe>
-                                  </div>
-                                ) : (
-                                  <div className="pdf-preview mb-4">
-                                    <p>No file added</p>
-                                  </div>
-                                )}
+                                <span className="font-bold">PDF/DOC LINK:</span>{" "}   
+                                <p>{data?.docLink}</p>                             
                               </div>
                               <p className="bg-indigo-100 rounded-lg p-2">
                                 <span className="font-bold">NOTE:</span>{" "}

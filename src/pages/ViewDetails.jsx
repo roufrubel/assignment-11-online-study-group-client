@@ -29,46 +29,47 @@ const ViewDetails = () => {
   const handleSubmitAssignment = (e) => {
     e.preventDefault();
     const form = e.target;
-  const docFile = form.docLink.files[0];
+  const docLink = form.docLink.value;
   const quickNote = form.quickNote.value;
 
-  const submittedAssignment = new FormData();
-  submittedAssignment.append('docLink', docFile);
-  submittedAssignment.append('quickNote', quickNote);
-  submittedAssignment.append('title', assignment.title);
-  submittedAssignment.append('marks', assignment.marks);
-  submittedAssignment.append('userEmail', userEmail);
+  const submittedAssignment = {
+  docLink,
+  quickNote,
+  title,
+  marks,
+  userEmail
+  }
 
     // console.log(submittedAssignment);
     fetch("https://assignment-11-online-group-study-server.vercel.app/submit", {
       method: "POST",
-      body: submittedAssignment,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(submittedAssignment),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
-          Swal.fire(
-            "Submitted!",
-            "Your assignment has been submitted.",
-            "success"
-          );
-          // navigate after submitted assignment
-          navigate(location?.state ? location.state : "/");
-        }
-
-        if (data.insertedId) {
-          form.reset();
-        }
-      })
-      .catch((error) => {
+    .then((res) => res.json())
+    .then((data) => {
+      // console.log(data);
+      if (data.insertedId) {
         Swal.fire(
-          "Error!",
-          "There was an error submitting your assignment.",
-          error
+          "Submitted!",
+          "Your assignment has been submitted.",
+          "success"
         );
-      });
-  };
+        // navigate after submitted assignment
+        navigate(location?.state ? location.state : "/");
+        form.reset();
+      }
+    })
+    .catch((error) => {
+      Swal.fire(
+        "Error!",
+        "There was an error submitting your assignment.",
+        error
+      );
+    });
+};
 
   if (loading) {
     return <p className="text-2xl text-amber-700">Loading....</p>;
@@ -114,13 +115,9 @@ const ViewDetails = () => {
                   Provide Pdf/Doc link here!
                 </h3>
                 <form onSubmit={handleSubmitAssignment}>
-                  <div className="pt-3 pb-5">
-                    <span className="font-bold">Attach Pdf/Doc : </span>
-                    <input
-                      type="file"
-                      className="file-input file-input-bordered file-input-sm w-full max-w-xs ml-2"
-                      name="docLink"
-                    />
+                  <div className="pt-3 pb-3 w-full">
+                    <span className="font-bold mb-2"> Pdf/Doc link : </span>
+                    <input type="text" placeholder="provide Pdf/Doc link here" className="input input-bordered w-full mt-1" name="docLink"/>
                   </div>
                   <textarea
                     name="quickNote"
